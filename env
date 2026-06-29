@@ -1,0 +1,29 @@
+#--------------------------------------------------------------------
+# Salin file ini menjadi ".env" lalu sesuaikan nilainya.
+#   cp env .env
+#--------------------------------------------------------------------
+
+CI_ENVIRONMENT = development
+
+#--------------------------------------------------------------------
+# APP
+#--------------------------------------------------------------------
+# Sesuaikan dengan URL lokal Anda. Untuk `php spark serve` gunakan port 8080.
+app.baseURL = 'http://localhost:8080/'
+app.indexPage = ''
+
+#--------------------------------------------------------------------
+# DATABASE (MySQL / MariaDB)
+#--------------------------------------------------------------------
+database.default.hostname = localhost
+database.default.database = bengkel_primamotor
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+
+#--------------------------------------------------------------------
+# SECURITY
+#--------------------------------------------------------------------
+security.csrfProtection = 'cookie'
+security.tokenRandomize = true
