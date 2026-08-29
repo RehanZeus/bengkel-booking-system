@@ -151,6 +151,35 @@
     background:var(--pink-2);padding:3px 9px;border-radius:999px;
   }
 
+  /* ---------- klip video trip ---------- */
+  .clips{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+  .clip{
+    cursor:pointer;border:none;text-align:left;font-family:inherit;color:inherit;
+    background:#fff;border-radius:22px;padding:12px 12px 14px;
+    box-shadow:var(--shadow-sm);transition:transform .22s ease, box-shadow .22s ease;
+  }
+  .clip:hover{transform:translateY(-6px);box-shadow:0 24px 40px -18px rgba(240,70,138,.6)}
+  .clip .thumb{
+    position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;
+    overflow:hidden;margin-bottom:10px;
+    background:linear-gradient(135deg,var(--pink-3),#d9b8ff);
+    display:grid;place-items:center;font-size:40px;
+  }
+  .clip .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .clip .play{
+    position:absolute;right:9px;bottom:9px;width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,.92);display:grid;place-items:center;
+    font-size:13px;color:var(--pink-6);padding-left:3px;
+    box-shadow:0 4px 10px rgba(91,42,65,.28);transition:transform .22s ease;
+  }
+  .clip:hover .play{transform:scale(1.15)}
+  .clip .t{font-family:'Baloo 2',cursive;font-weight:700;font-size:16.5px;display:block;line-height:1.25}
+  .clip .s{font-size:12.5px;color:var(--plum-soft);font-weight:600}
+  .clip .soon{
+    display:inline-block;margin-top:6px;font-size:11px;font-weight:700;color:var(--pink-6);
+    background:var(--pink-2);padding:3px 9px;border-radius:999px;
+  }
+
   /* ---------- modal ---------- */
   .modal{
     position:fixed;inset:0;z-index:70;display:none;
@@ -171,6 +200,16 @@
     width:100%;max-height:46vh;object-fit:cover;object-position:center;
     border-radius:20px;margin:10px 0 4px;display:block;background:var(--pink-2);
   }
+  .modal-box video{
+    width:100%;max-height:56vh;border-radius:20px;margin:10px 0 4px;display:block;
+    background:#2b1520;
+  }
+  .modal-box .kosong{
+    border-radius:20px;margin:10px 0 4px;padding:26px 18px;
+    background:linear-gradient(135deg,var(--pink-2),#efe0ff);
+    color:var(--plum-soft);font-weight:600;font-size:14px;line-height:1.7;
+  }
+  .modal-box .kosong b{display:block;font-size:34px;margin-bottom:6px}
   .modal-box h3{margin:12px 0 6px;font-size:24px}
   .modal-box .date{font-size:12.5px;color:var(--pink-6);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
   .modal-box p{color:#6b3b52;line-height:1.8;font-weight:500;font-size:15.5px}
@@ -275,6 +314,15 @@
     <div class="grid" id="memoGrid"></div>
   </section>
 
+  <!-- ===== TRIP JOGJA ===== -->
+  <section class="reveal">
+    <div class="sec-head">
+      <h2 id="tripJudul"></h2>
+      <span id="tripSub"></span>
+    </div>
+    <div class="clips" id="clipGrid"></div>
+  </section>
+
   <!-- ===== ALASAN ===== -->
   <section class="reveal">
     <div class="sec-head">
@@ -374,6 +422,29 @@ Makasih udah sabar sama aku sejauh ini ${'\u{1F49D}'}`,
     { emoji:"🤝", judul:"Waktu Aku Susah", sub:"kamu tetap di sana", tanggal:"masa-masa berat",
       foto:"", cerita:"Kamu nggak pergi waktu aku lagi nggak enak diajak ngobrol. Itu yang bikin aku ngerasa paling bersalah waktu nyakitin kamu." },
   ],
+
+  // Video random pas trip Jogja.
+  // video : "video/malioboro.mp4" -> taruh filenya di folder video/
+  // poster: "" -> pakai emoji sebagai sampul. Isi "video/malioboro.jpg"
+  //         kalau mau sampulnya foto (bikin halaman lebih cepat kebuka).
+  trip: {
+    judul: "\u{1F6F5} Random Trip Jogja",
+    sub: "video-video nggak penting yang malah paling aku kangenin",
+    klip: [
+      { emoji:"\u{1F686}", judul:"Turun di Tugu", sub:"kamu heboh sendiri",
+        video:"", poster:"", cerita:"Baru keluar stasiun udah minta difoto. Aku sempet ngeluh, padahal diem-diem seneng lihat kamu se-excited itu." },
+      { emoji:"\u{1F6CD}\uFE0F", judul:"Malioboro Malem", sub:"rame tapi nagih",
+        video:"", poster:"", cerita:"Jalan pelan-pelan sambil kamu nawar apa aja. Nggak beli banyak, tapi ngobrolnya panjang banget." },
+      { emoji:"\u{1F35A}", judul:"Gudeg Pertama Kamu", sub:"muka kamu pas nyobain",
+        video:"", poster:"", cerita:"Kamu bilang manis banget, terus tetep dihabisin. Aku ngerekam diem-diem karena ekspresinya lucu parah." },
+      { emoji:"\u{1F6F5}", judul:"Nyasar Naik Motor", sub:"muter-muter nggak jelas",
+        video:"", poster:"", cerita:"Salah belok tiga kali, kamu ketawa terus di belakang. Nyasar sama kamu ternyata bukan hal yang bikin kesel." },
+      { emoji:"\u{1F305}", judul:"Maksa Nunggu Sunrise", sub:"ngantuk tapi jalan terus",
+        video:"", poster:"", cerita:"Bangun jam 4, dingin, sempet ngomel. Tapi pas langitnya mulai oranye kamu diem lama, dan aku malah lihatin kamu." },
+      { emoji:"\u{1F525}", judul:"Angkringan Tengah Malam", sub:"ngobrol lupa waktu",
+        video:"", poster:"", cerita:"Nasi kucing sama teh anget, ngobrolin hal random sampai tukang angkringannya mau tutup." },
+    ],
+  },
 
   // Alasan random yang muncul tiap tombol dipencet
   alasan: [
@@ -592,10 +663,57 @@ function openMemo(i){
   Music.ding();
   rain(8);
 }
-function closeModal(){ modal.classList.remove('open'); }
+let musikDijeda = false;
+function closeModal(){
+  modal.classList.remove('open');
+  const v = mBody.querySelector('video');
+  if(v){ v.pause(); v.removeAttribute('src'); v.load(); }
+  if(musikDijeda){ musikDijeda = false; setMusic(true); }
+}
 document.getElementById('closeModal').addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+/* =======================================================================
+   KLIP VIDEO TRIP JOGJA
+   Musiknya otomatis dijeda pas video jalan, terus nyala lagi pas ditutup.
+   ======================================================================= */
+document.getElementById('tripJudul').textContent = CONFIG.trip.judul;
+document.getElementById('tripSub').textContent = CONFIG.trip.sub;
+
+const clipGrid = document.getElementById('clipGrid');
+CONFIG.trip.klip.forEach((k, idx) => {
+  const b = document.createElement('button');
+  b.className = 'clip';
+  b.innerHTML = `<span class="thumb">
+      ${k.poster ? `<img src="${k.poster}" alt="${k.judul}" loading="lazy">` : k.emoji}
+      ${k.video ? '<span class="play">\u25B6</span>' : ''}
+    </span>
+    <span class="t">${k.judul}</span>
+    <span class="s">${k.sub}</span>
+    ${k.video ? '' : '<span class="soon">videonya belum dipasang</span>'}`;
+  b.addEventListener('click', () => openClip(idx));
+  clipGrid.appendChild(b);
+});
+
+function openClip(i){
+  const k = CONFIG.trip.klip[i];
+  mBody.innerHTML = `
+    ${k.video
+      ? `<video src="${k.video}"${k.poster ? ` poster="${k.poster}"` : ''} controls autoplay playsinline preload="metadata"></video>`
+      : `<div class="kosong"><b>${k.emoji}</b>Videonya belum dipasang.<br>
+           Isi bagian <code>video:</code> di CONFIG, arahin ke file di folder <code>video/</code>.</div>`}
+    <div class="date">${k.sub}</div>
+    <h3>${k.judul}</h3>
+    <p>${k.cerita}</p>`;
+  modal.classList.add('open');
+  if(k.video){
+    if(Music.isOn()){ musikDijeda = true; setMusic(false); }
+  } else {
+    Music.ding();
+    rain(6);
+  }
+}
 
 /* =======================================================================
    ALASAN RANDOM

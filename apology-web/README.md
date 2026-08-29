@@ -23,6 +23,7 @@ Buka `index.html`, scroll ke bagian `const CONFIG = { ... }` (ada penandanya:
 | `nama` | nama panggilan dia, muncul di judul besar |
 | `surat` | isi surat maaf. Tulis `{nama}` di mana pun kalau mau namanya muncul |
 | `kenangan` | daftar kartu kenangan (emoji, judul, tanggal, cerita) |
+| `trip` | judul, subjudul, dan daftar klip video trip Jogja |
 | `alasan` | alasan random yang muncul pas tombol dipencet |
 | `janji` | daftar janji yang bisa dicentang |
 
@@ -53,6 +54,28 @@ Tips foto:
   otomatis dipotong di bagian tengah biar ceritanya nggak kedorong keluar layar
 - Foto dari HP biasanya 3-5 MB. Kalau file HTML-nya mau dikirim langsung ke dia,
   kompres dulu (misal di squoosh.app) biar nggak berat dibuka
+
+### Masukin video trip Jogja
+
+1. Bikin folder `video/` di sebelah `index.html`
+2. Taruh klipnya, misal `video/malioboro.mp4`
+3. Di bagian `trip.klip`, isi `video:"video/malioboro.mp4"`
+
+Selama `video` masih kosong, kartunya tetap tampil pakai emoji dan dikasih
+label "videonya belum dipasang", jadi gampang ketahuan mana yang belum diisi.
+
+Pas videonya diputar, musik latar otomatis berhenti, terus nyala lagi begitu
+pop-up-nya ditutup. Jadi suara video sama musiknya nggak tabrakan.
+
+Tips video:
+
+- `.mp4` paling aman — itu format bawaan rekaman HP, jalan di semua browser.
+  `.webm` dan `.mov` juga bisa, tapi `.mov` kadang rewel di HP Android
+- Klip pendek (10-30 detik) paling enak. Video panjang bikin halaman berat
+- Isi `poster:"video/malioboro.jpg"` kalau mau sampul kartunya pakai gambar.
+  Kalau dikosongin, sampulnya pakai emoji dan halamannya justru lebih ringan
+- Video HP 1 menit bisa 100 MB lebih. Kalau mau dikirim, kompres dulu
+  (misal di handbrake atau kompres bawaan HP) ke ukuran 720p
 
 ## Cara ngirim ke dia
 
