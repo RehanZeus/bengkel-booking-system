@@ -19,4 +19,5 @@ DirectoryIndex index.html index.htm index.php
   ExpiresByType image/png  "access plus 7 days"
   ExpiresByType image/webp "access plus 7 days"
   ExpiresByType video/mp4  "access plus 7 days"
+  ExpiresByType audio/mpeg "access plus 7 days"
 </IfModule>

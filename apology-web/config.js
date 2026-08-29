@@ -13,6 +13,15 @@ const CONFIG = {
   // Nama web-nya, muncul di tab browser dan pas link-nya di-share
   judulTab: "Amaliarokhaliku 💗",
 
+  // Musik latar.
+  //   file: ""                  -> pakai musik bawaan (dibikin sendiri sama halamannya)
+  //   file: "musik/cherry.mp3"  -> pakai lagu kamu, taruh filenya di folder musik/
+  musik: {
+    file: "",
+    volume: 0.8,     // dari 0 (sunyi) sampai 1 (paling keras)
+    mulaiDetik: 0,   // mulai dari detik ke berapa, biar nggak nunggu intronya
+  },
+
   // Nama panggilan dia (muncul di judul besar di halamannya)
   nama: "Sayang",
 

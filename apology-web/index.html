@@ -425,7 +425,7 @@ document.getElementById('introTitle').textContent = 'Ada surat buat kamu, ' + CO
    MUSIK — dibuat langsung lewat Web Audio API (nggak butuh file mp3)
    Nada lembut ala music box + bass hangat, muter terus (loop).
    ======================================================================= */
-const Music = (function(){
+const Synth = (function(){
   const N = {  // frekuensi nada
     'C3':130.81,'E3':164.81,'F3':174.61,'G3':196.00,'A3':220.00,'B3':246.94,
     'C4':261.63,'D4':293.66,'E4':329.63,'F4':349.23,'G4':392.00,'A4':440.00,'B4':493.88,
@@ -523,6 +523,68 @@ const Music = (function(){
   }
 
   return { start, stop, ding, isOn: () => on };
+})();
+
+/* =======================================================================
+   PEMILIH MUSIK
+   Kalau CONFIG.musik.file diisi -> pakai lagu itu.
+   Kalau dikosongin -> pakai musik bawaan yang dibikin sendiri di atas.
+   Kalau file lagunya nggak ketemu -> otomatis balik ke musik bawaan,
+   jadi halamannya nggak pernah sunyi gara-gara salah ketik nama file.
+   ======================================================================= */
+const Music = (function(){
+  const set = CONFIG.musik || {};
+  if(!set.file) return Synth;
+
+  const maks = typeof set.volume === 'number' ? set.volume : 0.8;
+  const audio = new Audio(set.file);
+  audio.loop = true;
+  audio.preload = 'auto';
+  audio.volume = 0;
+
+  let on = false, fade = null, rusak = false, mulaiDari = false;
+
+  audio.addEventListener('error', () => {
+    console.warn('Lagu "' + set.file + '" nggak kebaca. Cek nama filenya. Sementara pakai musik bawaan.');
+    rusak = true;
+    clearInterval(fade);
+    audio.pause();
+    if(on){ on = false; Synth.start(); }
+  });
+
+  function keVolume(tujuan, ms, selesai){
+    clearInterval(fade);
+    const awal = audio.volume, langkah = 20, jeda = Math.max(ms / langkah, 16);
+    let i = 0;
+    fade = setInterval(() => {
+      i++;
+      const v = awal + (tujuan - awal) * (i / langkah);
+      audio.volume = Math.min(1, Math.max(0, v));
+      if(i >= langkah){ clearInterval(fade); if(selesai) selesai(); }
+    }, jeda);
+  }
+
+  function start(){
+    if(rusak) return Synth.start();
+    if(on) return;
+    on = true;
+    if(!mulaiDari && set.mulaiDetik){
+      try { audio.currentTime = set.mulaiDetik; } catch(e){}
+    }
+    mulaiDari = true;
+    const janji = audio.play();
+    if(janji && janji.catch) janji.catch(() => {});
+    keVolume(maks, 1400);
+  }
+
+  function stop(){
+    if(rusak) return Synth.stop();
+    if(!on) return;
+    on = false;
+    keVolume(0, 400, () => audio.pause());
+  }
+
+  return { start, stop, ding: Synth.ding, isOn: () => rusak ? Synth.isOn() : on };
 })();
 
 const musicBtn = document.getElementById('musicBtn');

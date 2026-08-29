@@ -8,7 +8,8 @@ apology-web/
 ├── config.js    ← INI yang kamu edit (semua tulisan ada di sini)
 ├── .htaccess    ← setelan buat hosting Apache (Hostinger)
 ├── foto/        ← isi foto-fotonya
-└── video/       ← isi videonya
+├── video/       ← isi videonya
+└── musik/       ← isi lagunya (kalau mau ganti musik bawaan)
 ```
 
 Web ini dipasang di **amaliarokhaliku.xyz** (Hostinger).
@@ -104,7 +105,43 @@ Tips video:
 - Kalau videonya besar, isi juga `poster:"video/sampul.jpg"`. Sampulnya
   kebuka duluan, videonya baru diunduh pas tombol play dipencet
 
-## 5. Upload ke Hostinger
+## 5. Ganti lagunya
+
+Bawaannya, musiknya dibikin sendiri sama halamannya (nada lembut, muter terus).
+Kalau mau diganti lagu sendiri:
+
+1. Bikin folder `musik` di sebelah `index.html`
+2. Taruh lagunya di situ, misal `cherry.mp3`
+3. Di `config.js` bagian `musik`, isi nama filenya:
+
+```js
+musik: {
+  file: "musik/cherry.mp3",
+  volume: 0.8,
+  mulaiDetik: 0,
+},
+```
+
+| Isian | Fungsinya |
+|---|---|
+| `file` | nama file lagunya. Kosongin (`""`) buat balik ke musik bawaan |
+| `volume` | dari `0` (sunyi) sampai `1` (paling keras). `0.8` udah pas |
+| `mulaiDetik` | mulai dari detik ke berapa. Isi `12` kalau mau lompat intronya |
+
+Lagunya muter terus (ngulang sendiri), pelan-pelan naik pas pertama nyala,
+dan otomatis berhenti pas video diputar.
+
+Tips lagu:
+
+- `.mp3` paling aman, jalan di semua browser. `.m4a` dan `.ogg` juga bisa,
+  tapi `.m4a` kadang rewel di HP Android
+- Ukurannya biasanya 3-8 MB per lagu, masih aman
+- **Kalau nama filenya salah ketik, halamannya nggak bakal sunyi** — otomatis
+  balik ke musik bawaan. Cek Console browser, ada peringatannya di situ
+- Lagunya lagu orang, jadi simpen buat berdua aja — jangan didaftarin ke
+  Google atau disebar ke publik
+
+## 6. Upload ke Hostinger
 
 Domain: **amaliarokhaliku.xyz**
 
@@ -125,7 +162,8 @@ public_html/
 ├── config.js
 ├── .htaccess
 ├── foto/
-└── video/
+├── video/
+└── musik/
 ```
 
 Kalau file-nya kebungkus folder, alamatnya jadi
@@ -150,7 +188,7 @@ ke `https://`.
 Domain baru kadang butuh beberapa jam sampai bisa diakses di mana-mana.
 Kalau belum kebuka, tunggu dulu, jangan buru-buru diutak-atik.
 
-## 6. Ganti isinya setelah online
+## 7. Ganti isinya setelah online
 
 Cukup edit `config.js` di komputer, terus upload ulang **file itu aja** ke
 `public_html` (timpa yang lama). Nggak perlu upload ulang semuanya.
@@ -158,7 +196,7 @@ Cukup edit `config.js` di komputer, terus upload ulang **file itu aja** ke
 Berkat `.htaccess` yang ikut ke-upload, hasil editnya langsung kelihatan
 tanpa harus clear cache browser.
 
-## 7. Nama webnya
+## 8. Nama webnya
 
 Nama yang muncul di tab browser diatur di `config.js` paling atas:
 
@@ -180,9 +218,11 @@ Kalau bingung, simpan dulu backup `config.js` sebelum ngedit banyak-banyak.
 
 ## Catatan lain
 
-- **Musiknya dibikin langsung sama halamannya** (bukan file mp3), jadi nggak
-  ada file lagu yang bisa hilang. Baru bunyi setelah tombol "Buka Suratnya"
-  diklik — itu aturan browser, bukan error
+- **Musiknya baru bunyi setelah tombol "Buka Suratnya" diklik** — itu aturan
+  browser (nggak boleh ada suara sebelum orangnya klik sesuatu), bukan error.
+  Makanya dibikin layar amplop di awal
+- Kalau `musik.file` dikosongin, musiknya dibikin langsung sama halamannya,
+  jadi nggak ada file lagu yang bisa hilang
 - Pas video diputar, musiknya otomatis berhenti, nyala lagi pas videonya kelar
 - Kalau dibuka tanpa internet, fontnya ganti bawaan komputer.
   Tampilannya tetap rapi
