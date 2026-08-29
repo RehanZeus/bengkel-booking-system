@@ -43,6 +43,17 @@ Copy satu blok di dalam `kenangan`, terus ubah isinya:
 
 Kalau `foto` dibiarkan kosong (`foto:""`), yang tampil emoji besar — tetap lucu kok.
 
+Fotonya cuma muncul di dalam pop-up (setelah kartunya diklik), jadi kartunya
+tetap emoji dan tetap jadi kejutan buat dia.
+
+Tips foto:
+
+- Format `.jpg`, `.png`, `.webp`, `.gif` semuanya jalan
+- Foto landscape atau kotak paling pas. Foto portrait tetap bisa, cuma
+  otomatis dipotong di bagian tengah biar ceritanya nggak kedorong keluar layar
+- Foto dari HP biasanya 3-5 MB. Kalau file HTML-nya mau dikirim langsung ke dia,
+  kompres dulu (misal di squoosh.app) biar nggak berat dibuka
+
 ## Cara ngirim ke dia
 
 - **Paling gampang:** kirim file `index.html`-nya langsung (kalau nggak pakai foto)
