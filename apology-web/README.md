@@ -6,9 +6,12 @@ Nggak perlu install apa-apa. Nggak perlu ngerti coding. Cukup 2 file:
 apology-web/
 ├── index.html   ← jangan diapa-apain, ini mesinnya
 ├── config.js    ← INI yang kamu edit (semua tulisan ada di sini)
-├── foto/        ← bikin sendiri, isi foto-fotonya
-└── video/       ← bikin sendiri, isi videonya
+├── .htaccess    ← setelan buat hosting Apache (Hostinger)
+├── foto/        ← isi foto-fotonya
+└── video/       ← isi videonya
 ```
+
+Web ini dipasang di **amaliarokhaliku.xyz** (Hostinger).
 
 ---
 
@@ -101,40 +104,67 @@ Tips video:
 - Kalau videonya besar, isi juga `poster:"video/sampul.jpg"`. Sampulnya
   kebuka duluan, videonya baru diunduh pas tombol play dipencet
 
-## 5. Kirim ke dia
+## 5. Upload ke Hostinger
 
-**Cara paling gampang — jadiin link (gratis, nggak perlu daftar):**
+Domain: **amaliarokhaliku.xyz**
 
-1. Buka [app.netlify.com/drop](https://app.netlify.com/drop)
-2. Seret folder `apology-web` ke kotak di halaman itu
-3. Tunggu sebentar, langsung dapet link. Kirim linknya ke dia
+1. Login hPanel Hostinger → menu **Websites** → pilih domainnya → **File Manager**
+2. Masuk ke folder **`public_html`**
+3. **Hapus dulu file bawaannya** kalau ada — biasanya `default.php`,
+   `index.php`, atau halaman "Coming Soon". Kalau nggak dihapus, yang kebuka
+   malah halaman itu, bukan web kamu
+4. Klik **Upload**, pilih file zip-nya
+5. Klik kanan zip-nya → **Extract**, terus zip-nya dihapus
 
-Foto dan videonya ikut kebawa, jadi aman dibuka dari HP dia.
+Isi `public_html` harus jadi kayak gini — **langsung di root, jangan
+dibungkus folder lagi**:
 
-**Kalau nggak pakai foto/video sama sekali:** kirim `index.html` sama
-`config.js` langsung juga bisa, tapi dua-duanya harus ada di folder yang sama.
+```
+public_html/
+├── index.html
+├── config.js
+├── .htaccess
+├── foto/
+└── video/
+```
 
-## 6. Kasih nama webnya
+Kalau file-nya kebungkus folder, alamatnya jadi
+`amaliarokhaliku.xyz/apology-web/` — bukan yang kita mau.
 
-**Nama di tab browser** diatur di `config.js` paling atas:
+Buka `https://amaliarokhaliku.xyz`. Selesai.
+
+### Kalau videonya gede
+
+File Manager kadang gagal upload file besar. Pakai FTP:
+
+1. hPanel → **Files → FTP Accounts**, catat host, username, password
+2. Download **FileZilla** (gratis), masukin data tadi
+3. Seret videonya ke `public_html/video/`
+
+### Aktifin HTTPS
+
+hPanel → **Security → SSL**. Biasanya udah otomatis, tapi cek aja. Kalau ada
+opsi **Force HTTPS**, nyalain — biar yang buka `http://` otomatis dialihin
+ke `https://`.
+
+Domain baru kadang butuh beberapa jam sampai bisa diakses di mana-mana.
+Kalau belum kebuka, tunggu dulu, jangan buru-buru diutak-atik.
+
+## 6. Ganti isinya setelah online
+
+Cukup edit `config.js` di komputer, terus upload ulang **file itu aja** ke
+`public_html` (timpa yang lama). Nggak perlu upload ulang semuanya.
+
+Berkat `.htaccess` yang ikut ke-upload, hasil editnya langsung kelihatan
+tanpa harus clear cache browser.
+
+## 7. Nama webnya
+
+Nama yang muncul di tab browser diatur di `config.js` paling atas:
 
 ```js
 judulTab: "Amaliarokhaliku 💗",
 ```
-
-**Nama di link-nya.** Habis di-drop ke Netlify, kamu dapet link acak macam
-`fluffy-cat-123.netlify.app`. Bisa diganti gratis:
-
-1. Di dashboard Netlify, buka **Site configuration → Change site name**
-2. Isi `amaliarokhaliku`
-3. Link-nya jadi `amaliarokhaliku.netlify.app`
-
-Cuma boleh huruf kecil, angka, sama tanda minus — nggak boleh spasi.
-
-**Kalau mau domain beneran** (tanpa embel-embel `.netlify.app`), beli dulu
-domainnya di Niagahoster, Domainesia, Rumahweb, atau Cloudflare, terus di
-Netlify buka **Domain management → Add a domain** dan ikutin petunjuk DNS-nya.
-Netlify ngasih sertifikat HTTPS-nya gratis.
 
 ---
 

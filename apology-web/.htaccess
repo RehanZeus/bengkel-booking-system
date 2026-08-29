@@ -1,0 +1,22 @@
+# Berkas ini cuma kepakai di hosting Apache (Hostinger, cPanel, dsb).
+# Di Netlify atau GitHub Pages diabaikan, jadi aman kalau ikut ke-upload.
+
+# Pastikan index.html yang dibuka, bukan index.php bawaan hosting
+DirectoryIndex index.html index.htm index.php
+
+# Jangan cache halaman & config, biar hasil edit langsung kelihatan
+# tanpa harus clear cache browser
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# Foto dan video boleh dicache lama, biar buka halamannya cepet
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 7 days"
+  ExpiresByType image/png  "access plus 7 days"
+  ExpiresByType image/webp "access plus 7 days"
+  ExpiresByType video/mp4  "access plus 7 days"
+</IfModule>
