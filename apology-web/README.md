@@ -8,6 +8,7 @@ Satu file HTML, tanpa build, tanpa install apa pun. Tinggal buka `index.html` di
 - **Musik romantis** yang dibikin langsung lewat Web Audio API (nggak butuh file mp3, jadi nggak ada masalah file hilang / autoplay diblokir). Tombol 🎵 di pojok kanan atas buat on/off
 - **Surat maaf** yang muncul diketik pelan-pelan
 - **Kartu kenangan** yang bisa diklik satu-satu, tiap kartu buka cerita kalian
+- **Video highlight trip Jogja** yang bisa diputar langsung di halamannya
 - **Tombol "Kasih Alasan"** — keluar alasan sayang random tiap dipencet
 - **Daftar janji** yang bisa dicentang
 - **Pertanyaan terakhir** "Boleh aku dimaafin?" — tombol "Belum" kabur kalau didekati 😄
@@ -23,7 +24,7 @@ Buka `index.html`, scroll ke bagian `const CONFIG = { ... }` (ada penandanya:
 | `nama` | nama panggilan dia, muncul di judul besar |
 | `surat` | isi surat maaf. Tulis `{nama}` di mana pun kalau mau namanya muncul |
 | `kenangan` | daftar kartu kenangan (emoji, judul, tanggal, cerita) |
-| `trip` | judul, subjudul, dan daftar klip video trip Jogja |
+| `trip` | video highlight trip Jogja: video, sampul, cerita, dan daftar momen |
 | `alasan` | alasan random yang muncul pas tombol dipencet |
 | `janji` | daftar janji yang bisa dicentang |
 
@@ -55,27 +56,40 @@ Tips foto:
 - Foto dari HP biasanya 3-5 MB. Kalau file HTML-nya mau dikirim langsung ke dia,
   kompres dulu (misal di squoosh.app) biar nggak berat dibuka
 
-### Masukin video trip Jogja
+### Masukin video highlight trip Jogja
+
+Bagian ini isinya **satu video** aja — gabungan potongan-potongan random selama
+di Jogja.
 
 1. Bikin folder `video/` di sebelah `index.html`
-2. Taruh klipnya, misal `video/malioboro.mp4`
-3. Di bagian `trip.klip`, isi `video:"video/malioboro.mp4"`
+2. Taruh videonya, misal `video/trip-jogja.mp4`
+3. Di bagian `trip`, isi `video: "video/trip-jogja.mp4"`
 
-Selama `video` masih kosong, kartunya tetap tampil pakai emoji dan dikasih
-label "videonya belum dipasang", jadi gampang ketahuan mana yang belum diisi.
+Selama `video` masih kosong, yang tampil emoji plus tulisan "videonya belum
+dipasang" dan catatan cara masangnya.
+
+Yang bisa diatur di `trip`:
+
+| Isian | Fungsinya |
+|---|---|
+| `video` | file videonya |
+| `poster` | gambar sampul sebelum diputar. Kosongin buat pakai emoji |
+| `durasi` | tulisan durasi di pojok sampul, misal `"2:14"`. Boleh dikosongin |
+| `cerita` | keterangan di bawah video |
+| `momen` | daftar label momen yang ada di dalam videonya |
 
 Pas videonya diputar, musik latar otomatis berhenti, terus nyala lagi begitu
-pop-up-nya ditutup. Jadi suara video sama musiknya nggak tabrakan.
+videonya dipause atau habis. Jadi suara video sama musiknya nggak tabrakan.
+Pas videonya kelar, muncul hujan hati.
 
 Tips video:
 
 - `.mp4` paling aman — itu format bawaan rekaman HP, jalan di semua browser.
-  `.webm` dan `.mov` juga bisa, tapi `.mov` kadang rewel di HP Android
-- Klip pendek (10-30 detik) paling enak. Video panjang bikin halaman berat
-- Isi `poster:"video/malioboro.jpg"` kalau mau sampul kartunya pakai gambar.
-  Kalau dikosongin, sampulnya pakai emoji dan halamannya justru lebih ringan
-- Video HP 1 menit bisa 100 MB lebih. Kalau mau dikirim, kompres dulu
-  (misal di handbrake atau kompres bawaan HP) ke ukuran 720p
+  `.webm` juga bisa. `.mov` kadang rewel di HP Android
+- Video HP 1 menit gampang tembus 100 MB. Kompres dulu ke 720p
+  (misal pakai HandBrake atau fitur kompres bawaan HP) biar nggak berat dibuka
+- Isi `poster` kalau videonya besar — sampulnya kebuka duluan, videonya baru
+  diunduh pas tombol play dipencet
 
 ## Cara ngirim ke dia
 
