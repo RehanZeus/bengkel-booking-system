@@ -176,6 +176,15 @@
     background:linear-gradient(135deg,var(--pink-3),#d9b8ff);
   }
   .player video{width:100%;height:100%;display:block;background:#2b1520}
+  .player iframe{width:100%;height:100%;border:0;display:block;background:#2b1520}
+  .tutup{
+    display:inline-flex;align-items:center;gap:7px;margin:12px auto 0;
+    border:2px solid var(--pink-3);background:#fff;color:var(--pink-6);
+    font-family:'Baloo 2',cursive;font-weight:700;font-size:14px;
+    padding:9px 18px;border-radius:999px;cursor:pointer;
+    box-shadow:var(--shadow-sm);transition:transform .18s ease;
+  }
+  .tutup:hover{transform:translateY(-2px)}
   .player .cover{
     position:absolute;inset:0;border:none;padding:0;cursor:pointer;width:100%;
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
@@ -699,8 +708,21 @@ CONFIG.trip.momen.forEach(m => {
 
 const player = document.getElementById('player');
 const T = CONFIG.trip;
+const adaVideo = !!(T.video || T.youtube);
 
-if(T.video){
+function pasangSampul(){
+  if(!adaVideo){
+    player.innerHTML = `<span class="cover" style="cursor:default">
+        <span class="em">${T.emoji}</span>
+        <span class="hint">videonya belum dipasang</span>
+      </span>`;
+    const n = document.createElement('p');
+    n.className = 'belum';
+    n.innerHTML = 'Taruh videonya di folder <code>video/</code> terus isi <code>video:</code>, ' +
+                  'atau upload ke YouTube (Unlisted) terus isi <code>youtube:</code> di CONFIG.';
+    player.after(n);
+    return;
+  }
   player.innerHTML = `<button class="cover" id="tripCover" aria-label="Putar video trip Jogja">
       ${T.poster ? `<img src="${T.poster}" alt=""><span class="shade"></span>` : `<span class="em">${T.emoji}</span>`}
       <span class="playbig">\u25B6</span>
@@ -708,24 +730,43 @@ if(T.video){
       ${T.durasi ? `<span class="dur">${T.durasi}</span>` : ''}
     </button>`;
   document.getElementById('tripCover').addEventListener('click', putarTrip);
-} else {
-  player.innerHTML = `<span class="cover" style="cursor:default">
-      <span class="em">${T.emoji}</span>
-      <span class="hint">videonya belum dipasang</span>
-    </span>`;
-  const n = document.createElement('p');
-  n.className = 'belum';
-  n.innerHTML = 'Taruh videonya di folder <code>video/</code>, terus isi bagian <code>video:</code> di CONFIG.';
-  player.after(n);
 }
+pasangSampul();
 
 function putarTrip(){
+  // Video dari YouTube (buat video yang kegedean kalau ditaruh di hosting sendiri)
+  if(T.youtube){
+    player.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${T.youtube}?autoplay=1&rel=0&modestbranding=1&playsinline=1"
+      title="Video trip Jogja" allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+      allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+    if(Music.isOn()){ musikDijeda = true; setMusic(false); }
+    pasangTombolTutup();
+    return;
+  }
+  // Video dari file sendiri
   player.innerHTML = `<video id="tripVideo" src="${T.video}"${T.poster ? ` poster="${T.poster}"` : ''}
     controls autoplay playsinline preload="metadata"></video>`;
   const v = document.getElementById('tripVideo');
   v.addEventListener('play',  () => { if(Music.isOn()){ musikDijeda = true; setMusic(false); } });
   v.addEventListener('pause', nyalainMusikLagi);
   v.addEventListener('ended', () => { nyalainMusikLagi(); rain(30); });
+}
+
+// YouTube nggak ngasih tau halaman ini kapan videonya kelar,
+// jadi musiknya dinyalain lagi lewat tombol ini.
+function pasangTombolTutup(){
+  if(document.getElementById('tutupVideo')) return;
+  const b = document.createElement('button');
+  b.id = 'tutupVideo';
+  b.className = 'tutup';
+  b.textContent = '\u25C0 Udah nonton, nyalain musiknya lagi';
+  b.addEventListener('click', () => {
+    b.remove();
+    pasangSampul();
+    nyalainMusikLagi();
+    rain(20);
+  });
+  player.after(b);
 }
 
 function nyalainMusikLagi(){

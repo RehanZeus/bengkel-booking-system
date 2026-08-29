@@ -88,6 +88,10 @@ dari kurung buka sampai koma terakhirnya.
 
 ## 4. Masukin video
 
+Ada dua cara. Pilih sesuai ukuran videonya.
+
+### Cara A — file sendiri (buat video di bawah ~50 MB)
+
 1. Bikin folder `video` di sebelah `index.html`
 2. Masukin videonya, misal `trip-jogja.mp4`
 3. Di `config.js` bagian `trip`, isi:
@@ -97,15 +101,58 @@ video: "video/trip-jogja.mp4",
 durasi: "2:14",
 ```
 
-Selama masih kosong, tampilannya jadi tulisan "videonya belum dipasang".
+### Cara B — YouTube (buat video gede)
 
-Tips video:
+Kalau videonya ratusan MB, jangan ditaruh di hosting. Upload ke YouTube,
+set jadi **Unlisted** (cuma yang punya link yang bisa nonton, nggak muncul
+di pencarian), terus ambil ID-nya dari alamatnya:
 
-- `.mp4` paling aman — itu format bawaan rekaman HP, jalan di semua browser
-- Video HP 1 menit gampang tembus 100 MB. Kompres dulu ke 720p
-  (pakai HandBrake, atau fitur kompres bawaan HP) biar nggak berat dibuka
-- Kalau videonya besar, isi juga `poster:"video/sampul.jpg"`. Sampulnya
-  kebuka duluan, videonya baru diunduh pas tombol play dipencet
+```
+https://youtu.be/dQw4w9WgXcQ
+                 ^^^^^^^^^^^  ini ID-nya
+```
+
+Isi di `config.js`:
+
+```js
+youtube: "dQw4w9WgXcQ",
+```
+
+Kalau `video` dan `youtube` dua-duanya diisi, yang dipakai YouTube.
+
+Bedanya: kalau pakai YouTube, musiknya berhenti pas videonya dibuka, tapi
+nyalainnya lagi harus lewat tombol **"Udah nonton, nyalain musiknya lagi"**
+yang muncul di bawah videonya. Soalnya YouTube nggak ngasih tau halaman ini
+kapan videonya kelar.
+
+### Soal ukuran video
+
+Patokan kasar: **720p ≈ 15 MB per menit**.
+
+| Ukuran | Hasilnya di HP dia |
+|---|---|
+| Di bawah 50 MB | Aman, muter hampir langsung |
+| 100 MB | Masih jalan, tapi makan kuota dia dan suka macet kalau sinyal jelek |
+| Di atas 200 MB | Pakai cara B (YouTube) aja |
+
+Video nggak perlu kedownload penuh baru bisa diputer — dia nge-buffer sambil
+jalan. Tapi kuota dan sinyal jelek tetap masalah.
+
+Cara ngecilin: pakai **HandBrake** (gratis, handbrake.fr) → preset
+**Fast 720p30** → tab Video, Quality **RF 24** → Start Encode. Mau motong
+bagian tertentu, pakai tab **Range**. Kalau ngerjainnya dari HP, pakai
+**CapCut** terus export **720p**.
+
+Highlight 2-3 menit biasanya ketemu di angka 30-45 MB, dan sejujurnya lebih
+enak ditonton daripada video 10 menit.
+
+Tips lain:
+
+- `.mp4` paling aman, jalan di semua browser. `.mov` kadang rewel di Android
+- Isi `poster:"video/sampul.jpg"` kalau videonya besar. Sampulnya kebuka
+  duluan, videonya baru diunduh pas tombol play dipencet
+- Selama `video` dan `youtube` dua-duanya kosong, tampilannya jadi tulisan
+  "videonya belum dipasang"
 
 ## 5. Ganti lagunya
 

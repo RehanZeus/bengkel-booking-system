@@ -76,7 +76,12 @@ Makasih udah sabar sama aku sejauh ini ${'💝'}`,
     judul: "🛵 Random Trip Jogja",
     sub: "satu video, isinya potongan-potongan random selama kita di sana",
     emoji: "🛵",
+    // Pilih SALAH SATU:
+    //   video   -> file sendiri di folder video/ (bagus buat video kecil)
+    //   youtube -> ID video YouTube (buat video gede, biar hosting nggak berat)
+    // Kalau dua-duanya diisi, yang dipakai YouTube.
     video: "",
+    youtube: "",     // contoh: youtu.be/dQw4w9WgXcQ  ->  isi "dQw4w9WgXcQ"
     poster: "",
     durasi: "",            // opsional, misal "2:14"
     cerita: "Aku gabungin rekaman-rekaman nggak penting yang aku simpen diem-diem. Nggak ada yang bagus, kamera goyang semua, tapi tiap kali aku buka lagi rasanya kayak balik ke hari itu.",
