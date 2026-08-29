@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maafin Aku Ya? 💌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink-1:#fff5f9;
+    --pink-2:#ffe3ef;
+    --pink-3:#ffc9e0;
+    --pink-4:#ff9ec7;
+    --pink-5:#ff6fa8;
+    --pink-6:#f0468a;
+    --plum:#5b2a41;
+    --plum-soft:#8a5a70;
+    --cream:#fffdf8;
+    --shadow:0 18px 40px -18px rgba(240,70,138,.45);
+    --shadow-sm:0 10px 24px -14px rgba(240,70,138,.5);
+    --radius:26px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Quicksand',system-ui,-apple-system,'Segoe UI',sans-serif;
+    color:var(--plum);
+    background:linear-gradient(170deg,var(--pink-1) 0%,var(--pink-2) 45%,#ffeaf3 100%);
+    overflow-x:hidden;
+    min-height:100vh;
+  }
+  h1,h2,h3,.font-fun{font-family:'Baloo 2','Quicksand',cursive,sans-serif;font-weight:800;letter-spacing:.2px}
+
+  /* ---------- background dekorasi ---------- */
+  .blobs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(50px);opacity:.55}
+  .blob.b1{width:420px;height:420px;background:#ffb3d5;top:-120px;left:-100px;animation:float 14s ease-in-out infinite}
+  .blob.b2{width:360px;height:360px;background:#ffd6a5;bottom:-120px;right:-80px;animation:float 18s ease-in-out infinite reverse}
+  .blob.b3{width:300px;height:300px;background:#e0c3fc;top:40%;right:-120px;animation:float 22s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.12)}}
+
+  .hearts-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .hb{position:absolute;bottom:-60px;font-size:22px;opacity:.5;animation:rise linear infinite}
+  @keyframes rise{
+    0%{transform:translateY(0) rotate(0deg);opacity:0}
+    10%{opacity:.6}
+    100%{transform:translateY(-115vh) rotate(360deg);opacity:0}
+  }
+
+  .wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 20px 90px}
+
+  /* ---------- intro / amplop ---------- */
+  #intro{
+    position:fixed;inset:0;z-index:60;
+    background:linear-gradient(160deg,#ffd9e8,#ffeaf3 60%,#fff);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:22px;text-align:center;padding:24px;
+    transition:opacity .7s ease, visibility .7s;
+  }
+  #intro.hide{opacity:0;visibility:hidden}
+  .envelope{
+    font-size:96px;line-height:1;
+    animation:wiggle 2.2s ease-in-out infinite;
+    filter:drop-shadow(0 14px 18px rgba(240,70,138,.35));
+  }
+  @keyframes wiggle{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(6deg) translateY(-12px)}}
+  #intro h1{font-size:clamp(28px,6vw,44px);margin:0}
+  #intro p{margin:0;color:var(--plum-soft);font-weight:600;max-width:440px}
+
+  /* ---------- tombol ---------- */
+  .btn{
+    border:none;cursor:pointer;font-family:'Baloo 2',cursive;font-weight:700;
+    font-size:18px;padding:14px 30px;border-radius:999px;color:#fff;
+    background:linear-gradient(135deg,var(--pink-5),var(--pink-6));
+    box-shadow:var(--shadow);transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{transform:translateY(-3px) scale(1.04)}
+  .btn:active{transform:scale(.97)}
+  .btn.ghost{
+    background:#fff;color:var(--pink-6);border:2px solid var(--pink-3);
+    box-shadow:var(--shadow-sm);
+  }
+
+  /* ---------- tombol musik ---------- */
+  #musicBtn{
+    position:fixed;top:18px;right:18px;z-index:50;
+    width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
+    background:#fff;box-shadow:var(--shadow-sm);font-size:24px;
+    display:grid;place-items:center;transition:transform .2s;
+  }
+  #musicBtn:hover{transform:scale(1.1)}
+  #musicBtn.playing{animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,111,168,.55)}50%{box-shadow:0 0 0 14px rgba(255,111,168,0)}}
+
+  /* ---------- hero ---------- */
+  header.hero{padding:90px 0 40px;text-align:center}
+  .sticker{font-size:64px;display:inline-block;animation:beat 1.6s ease-in-out infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}25%{transform:scale(1.18)}40%{transform:scale(1)}}
+  header.hero h1{
+    font-size:clamp(34px,8vw,62px);margin:14px 0 10px;line-height:1.1;
+    background:linear-gradient(120deg,var(--pink-6),#b565c9);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  header.hero p{font-size:clamp(15px,3.4vw,19px);color:var(--plum-soft);font-weight:600;max-width:560px;margin:0 auto}
+  .scroll-cue{margin-top:34px;font-size:28px;animation:bounce 1.8s infinite}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+  /* ---------- section ---------- */
+  section{margin-top:64px}
+  .sec-head{text-align:center;margin-bottom:26px}
+  .sec-head h2{font-size:clamp(24px,5.5vw,36px);margin:0 0 6px}
+  .sec-head span{color:var(--plum-soft);font-weight:600;font-size:15px}
+
+  .card{
+    background:var(--cream);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:26px 24px;border:2px solid #fff;
+  }
+
+  /* ---------- surat ---------- */
+  .letter{position:relative;overflow:hidden}
+  .letter .paper{
+    font-size:16.5px;line-height:1.95;color:#6b3b52;font-weight:500;white-space:pre-wrap;
+    min-height:120px;
+  }
+  .letter .paper::after{content:'▌';color:var(--pink-5);animation:blink .8s steps(1) infinite}
+  .letter.done .paper::after{display:none}
+  @keyframes blink{50%{opacity:0}}
+  .sign{margin-top:18px;text-align:right;font-family:'Baloo 2',cursive;font-size:20px;color:var(--pink-6)}
+
+  /* ---------- grid kenangan ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+  .memo{
+    cursor:pointer;border:none;text-align:left;font-family:inherit;color:inherit;
+    background:#fff;border-radius:22px;padding:18px 16px 16px;
+    box-shadow:var(--shadow-sm);transition:transform .22s ease, box-shadow .22s ease;
+    position:relative;overflow:hidden;
+  }
+  .memo::before{
+    content:'';position:absolute;inset:0;opacity:.18;
+    background:radial-gradient(120px 80px at 90% 0%,var(--pink-4),transparent 70%);
+  }
+  .memo:hover{transform:translateY(-6px) rotate(-1.5deg);box-shadow:0 24px 40px -18px rgba(240,70,138,.6)}
+  .memo .emoji{font-size:38px;display:block;margin-bottom:8px}
+  .memo .t{font-family:'Baloo 2',cursive;font-weight:700;font-size:17px;display:block}
+  .memo .s{font-size:12.5px;color:var(--plum-soft);font-weight:600}
+  .memo .tap{
+    position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;color:var(--pink-6);
+    background:var(--pink-2);padding:3px 9px;border-radius:999px;
+  }
+
+  /* ---------- modal ---------- */
+  .modal{
+    position:fixed;inset:0;z-index:70;display:none;
+    align-items:center;justify-content:center;padding:20px;
+    background:rgba(91,42,65,.45);backdrop-filter:blur(6px);
+  }
+  .modal.open{display:flex;animation:fadeIn .25s ease}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .modal-box{
+    background:var(--cream);border-radius:28px;max-width:460px;width:100%;
+    padding:28px 26px;box-shadow:0 30px 60px -20px rgba(91,42,65,.5);
+    text-align:center;animation:pop .35s cubic-bezier(.2,1.4,.4,1);position:relative;
+    max-height:88vh;overflow:auto;
+  }
+  @keyframes pop{from{transform:scale(.8) translateY(20px);opacity:0}to{transform:scale(1);opacity:1}}
+  .modal-box .big{font-size:66px;line-height:1}
+  .modal-box img{width:100%;border-radius:20px;margin:10px 0 4px;display:block}
+  .modal-box h3{margin:12px 0 6px;font-size:24px}
+  .modal-box .date{font-size:12.5px;color:var(--pink-6);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+  .modal-box p{color:#6b3b52;line-height:1.8;font-weight:500;font-size:15.5px}
+  .close{
+    position:absolute;top:12px;right:14px;border:none;background:var(--pink-2);
+    width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;color:var(--pink-6);font-weight:700;
+  }
+
+  /* ---------- alasan ---------- */
+  .reason-box{text-align:center}
+  #reasonText{
+    font-family:'Baloo 2',cursive;font-size:clamp(19px,4.4vw,26px);color:var(--pink-6);
+    min-height:78px;display:flex;align-items:center;justify-content:center;padding:10px 6px;
+  }
+  #reasonText.pop{animation:pop .4s cubic-bezier(.2,1.4,.4,1)}
+  .counter{font-size:13px;color:var(--plum-soft);font-weight:700;margin-top:6px}
+
+  /* ---------- janji ---------- */
+  .promise{
+    display:flex;gap:12px;align-items:center;background:#fff;border-radius:18px;
+    padding:14px 16px;margin-bottom:10px;cursor:pointer;box-shadow:var(--shadow-sm);
+    transition:transform .18s ease;font-weight:600;
+  }
+  .promise:hover{transform:translateX(6px)}
+  .promise .box{
+    width:26px;height:26px;border-radius:9px;border:2.5px solid var(--pink-4);
+    display:grid;place-items:center;flex:0 0 auto;color:#fff;font-size:15px;transition:.2s;
+  }
+  .promise.checked .box{background:var(--pink-5);border-color:var(--pink-5)}
+  .promise.checked span.txt{text-decoration:line-through;opacity:.6}
+
+  /* ---------- final ---------- */
+  .final{text-align:center;padding:40px 24px}
+  .final h2{font-size:clamp(26px,6vw,40px);margin:8px 0 4px}
+  .final .qbtns{display:flex;gap:14px;justify-content:center;margin-top:26px;flex-wrap:wrap;position:relative;min-height:60px}
+  #noBtn{transition:transform .25s cubic-bezier(.2,1.2,.4,1)}
+  #yesWrap{display:none}
+  #yesWrap.show{display:block;animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
+  #yesWrap .big{font-size:78px}
+  #yesWrap p{font-size:17px;color:#6b3b52;font-weight:600;line-height:1.8;max-width:460px;margin:10px auto 0}
+
+  footer{text-align:center;margin-top:60px;color:var(--plum-soft);font-weight:600;font-size:13.5px}
+
+  .fall{position:fixed;top:-40px;z-index:80;pointer-events:none;font-size:26px;animation:fall linear forwards}
+  @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:520px){
+    .card{padding:22px 18px}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:12px}
+  }
+</style>
+</head>
+<body>
+
+<div class="blobs">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+</div>
+<div class="hearts-bg" id="heartsBg"></div>
+
+<!-- ===== LAYAR PEMBUKA ===== -->
+<div id="intro">
+  <div class="envelope">💌</div>
+  <h1 id="introTitle">Ada surat buat kamu...</h1>
+  <p>Aku tau aku salah. Sebelum kamu marah lagi, boleh baca ini dulu nggak? Cuma sebentar kok 🥺</p>
+  <button class="btn" id="openBtn">Buka Suratnya 💗</button>
+  <p style="font-size:12.5px;opacity:.75">🎧 pakai suara ya, ada lagunya</p>
+</div>
+
+<button id="musicBtn" title="Musik on/off">🎵</button>
+
+<div class="wrap">
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="sticker">🧸</div>
+    <h1>Maafin Aku Ya,<br><span id="namaHero">Sayang</span>?</h1>
+    <p>Aku bikin website ini bukan buat pamer bisa ngoding, tapi karena aku bingung mau minta maaf lewat chat mulu. Jadi… aku bikin satu tempat khusus, isinya cuma kamu.</p>
+    <div class="scroll-cue">👇</div>
+  </header>
+
+  <!-- ===== SURAT ===== -->
+  <section class="reveal">
+    <div class="sec-head">
+      <h2>💌 Surat Maaf Aku</h2>
+      <span>ketik sendiri pelan-pelan, sabar ya</span>
+    </div>
+    <div class="card letter" id="letter">
+      <div class="paper" id="paper"></div>
+      <div class="sign" id="sign" style="opacity:0">— aku, yang lagi nyesel banget 🥺</div>
+    </div>
+  </section>
+
+  <!-- ===== KENANGAN ===== -->
+  <section class="reveal">
+    <div class="sec-head">
+      <h2>📸 Kebersamaan Kita</h2>
+      <span>klik satu-satu ya, semuanya masih aku inget kok</span>
+    </div>
+    <div class="grid" id="memoGrid"></div>
+  </section>
+
+  <!-- ===== ALASAN ===== -->
+  <section class="reveal">
+    <div class="sec-head">
+      <h2>💖 Alasan Aku Sayang Kamu</h2>
+      <span>pencet terus sampai bosen, nggak bakal abis</span>
+    </div>
+    <div class="card reason-box">
+      <div id="reasonText">Pencet tombol di bawah ini 👇</div>
+      <button class="btn" id="reasonBtn">Kasih Alasan 💘</button>
+      <div class="counter" id="reasonCount">baru 0 alasan yang kebuka</div>
+    </div>
+  </section>
+
+  <!-- ===== JANJI ===== -->
+  <section class="reveal">
+    <div class="sec-head">
+      <h2>🤞 Janji Aku Mulai Sekarang</h2>
+      <span>klik buat centang, biar kamu bisa nagih</span>
+    </div>
+    <div id="promiseList"></div>
+  </section>
+
+  <!-- ===== FINAL ===== -->
+  <section class="reveal">
+    <div class="card final">
+      <div id="askWrap">
+        <div class="sticker">🥺</div>
+        <h2>Jadi… boleh aku dimaafin?</h2>
+        <p style="color:var(--plum-soft);font-weight:600">Jawab jujur aja, tapi tombol "Belum" agak licin ya 😅</p>
+        <div class="qbtns">
+          <button class="btn" id="yesBtn">Iya, dimaafin 💕</button>
+          <button class="btn ghost" id="noBtn">Belum 😤</button>
+        </div>
+      </div>
+      <div id="yesWrap">
+        <div class="big">🥹💗</div>
+        <h2>Makasih banyak ya, sayang</h2>
+        <p>Aku nggak bakal nganggep maaf kamu itu gratis. Mulai detik ini aku bakal buktiin, bukan cuma janji di website. Sini peluk dulu 🤗<br><br>Aku sayang kamu, hari ini dan hari-hari setelahnya.</p>
+        <button class="btn" id="againBtn" style="margin-top:22px">Peluk lagi 🤗</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>dibuat pelan-pelan sambil mikirin kamu 💗</footer>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <button class="close" id="closeModal">✕</button>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<script>
+/* =======================================================================
+   ✏️  BAGIAN YANG BOLEH KAMU EDIT — ganti isinya sesuai cerita kalian
+   ======================================================================= */
+const CONFIG = {
+  // Nama panggilan dia (muncul di judul besar)
+  nama: "Sayang",
+
+  // Isi surat maaf. Tulis {nama} kalau mau nama dia muncul di situ.
+  surat:
+`Hai {nama}...
+
+Aku tau kemarin aku salah, dan aku nggak mau cari alasan apa pun.
+Aku minta maaf udah bikin kamu kecewa, bikin kamu nangis, dan bikin
+kamu ngerasa nggak dianggap. Itu bukan yang kamu pantas dapetin.
+
+Kamu selalu ada waktu aku lagi berantakan, dan aku malah lupa jaga
+perasaan kamu waktu kamu butuh aku. Maafin aku ya.
+
+Aku nggak minta kamu langsung baik-baik aja. Marah dulu nggak apa-apa,
+diem dulu juga nggak apa-apa. Aku cuma mau kamu tau: aku nggak
+ke mana-mana, dan aku bakal belajar jadi lebih baik buat kamu.
+
+Makasih udah sabar sama aku sejauh ini ${'\u{1F49D}'}`,
+
+  // Kartu kenangan. Mau tambah? tinggal copy satu blok { ... },
+  // foto: "" -> tampil emoji besar. foto: "foto/kita.jpg" -> tampil gambar.
+  kenangan: [
+    { emoji:"🌸", judul:"Pertama Ketemu",  sub:"awal semuanya", tanggal:"hari itu",
+      foto:"", cerita:"Aku masih inget kamu senyum duluan, terus aku salah tingkah setengah mati. Dari hari itu aku ngerasa hidup aku jadi rame." },
+    { emoji:"🍜", judul:"Makan Bareng",    sub:"tempat favorit kita", tanggal:"berkali-kali",
+      foto:"", cerita:"Kamu selalu bilang 'dikit aja' terus ujung-ujungnya nambah. Aku suka lihat kamu makan enak, itu salah satu hal favorit aku." },
+    { emoji:"🎬", judul:"Nonton Bareng",   sub:"kamu ketiduran lagi", tanggal:"malam minggu",
+      foto:"", cerita:"Filmnya sering nggak selesai karena kamu ketiduran di bahu aku. Nggak apa-apa, itu bagian paling enak dari nontonnya." },
+    { emoji:"🌧️", judul:"Kehujanan",       sub:"lari bareng, ketawa bareng", tanggal:"nggak sengaja",
+      foto:"", cerita:"Kita basah kuyup, kamu ngomel sambil ketawa, dan aku mikir: kayaknya aku mau begini terus sama kamu." },
+    { emoji:"📱", judul:"Chat Tengah Malam", sub:"sampe ketiduran", tanggal:"hampir tiap hari",
+      foto:"", cerita:"Ngobrol hal nggak penting sampai jam 2 pagi. Besoknya ngantuk, tapi nggak pernah nyesel." },
+    { emoji:"🎂", judul:"Ulang Tahun Kamu", sub:"kamu nangis terharu", tanggal:"tahun kemarin",
+      foto:"", cerita:"Kejutannya berantakan, kuenya hampir jatuh, tapi kamu tetep nangis terharu. Itu momen yang aku simpan rapet-rapet." },
+    { emoji:"🚗", judul:"Jalan-jalan",     sub:"nyasar tapi seru", tanggal:"perjalanan kita",
+      foto:"", cerita:"Salah jalan, muter-muter, tapi kamu jadiin itu lucu. Kamu emang jago bikin hal berantakan jadi kenangan." },
+    { emoji:"🤝", judul:"Waktu Aku Susah", sub:"kamu tetap di sana", tanggal:"masa-masa berat",
+      foto:"", cerita:"Kamu nggak pergi waktu aku lagi nggak enak diajak ngobrol. Itu yang bikin aku ngerasa paling bersalah waktu nyakitin kamu." },
+  ],
+
+  // Alasan random yang muncul tiap tombol dipencet
+  alasan: [
+    "Ketawa kamu itu obat paling murah dan paling manjur 😄",
+    "Kamu peduli sama hal kecil yang orang lain nggak notice 🥹",
+    "Kamu bikin hari yang biasa jadi kerasa spesial ✨",
+    "Kamu sabar banget sama aku, kadang kelewat sabar 🥺",
+    "Cara kamu cerita hal yang kamu suka itu lucu banget 🐣",
+    "Kamu jujur, walaupun jujurnya kadang nyelekit 😅",
+    "Kamu selalu inget hal-hal yang aku sendiri lupa 💭",
+    "Kamu bikin aku pengin jadi orang yang lebih baik 🌱",
+    "Marah kamu aja masih lucu, apalagi senyum kamu 💗",
+    "Karena tanpa kamu, semuanya kerasa sepi aja 🫶",
+    "Kamu kuat, tapi kamu tetep mau bersandar ke aku 🤍",
+    "Karena kamu... ya kamu. Nggak perlu alasan lain 💞",
+  ],
+
+  // Janji-janji yang bisa dicentang
+  janji: [
+    "Lebih dengerin kamu sebelum sibuk ngebela diri",
+    "Nggak ngulangin kesalahan yang sama",
+    "Bales chat kamu lebih cepet, nggak dicuekin",
+    "Minta maaf duluan kalau aku salah, tanpa gengsi",
+    "Lebih sering bilang sayang, bukan cuma mikirin",
+  ],
+};
+/* ======================= BATAS EDIT — sisanya kode ======================= */
+
+/* ---------- render nama & hero ---------- */
+document.getElementById('namaHero').textContent = CONFIG.nama;
+document.getElementById('introTitle').textContent = 'Ada surat buat kamu, ' + CONFIG.nama + '...';
+
+/* ---------- hati-hati melayang di background ---------- */
+(function heartsBg(){
+  const box = document.getElementById('heartsBg');
+  const set = ['💗','💕','🌸','✨','💖','🎀'];
+  for(let i=0;i<18;i++){
+    const h = document.createElement('div');
+    h.className='hb';
+    h.textContent = set[Math.floor(Math.random()*set.length)];
+    h.style.left = Math.random()*100 + '%';
+    h.style.fontSize = (14 + Math.random()*20) + 'px';
+    h.style.animationDuration = (11 + Math.random()*12) + 's';
+    h.style.animationDelay = (-Math.random()*20) + 's';
+    box.appendChild(h);
+  }
+})();
+
+/* =======================================================================
+   MUSIK — dibuat langsung lewat Web Audio API (nggak butuh file mp3)
+   Nada lembut ala music box + bass hangat, muter terus (loop).
+   ======================================================================= */
+const Music = (function(){
+  const N = {  // frekuensi nada
+    'C3':130.81,'E3':164.81,'F3':174.61,'G3':196.00,'A3':220.00,'B3':246.94,
+    'C4':261.63,'D4':293.66,'E4':329.63,'F4':349.23,'G4':392.00,'A4':440.00,'B4':493.88,
+    'C5':523.25,'D5':587.33,'E5':659.25,'F5':698.46,'G5':783.99,'A5':880.00
+  };
+  // 8 bar: C - G - Am - F - C - G - F - G
+  const bars = [
+    { bass:'C3', chord:['C4','E4','G4'], mel:[[0,'E5',1],[1,'D5',.5],[1.5,'C5',1.6],[3,'D5',.9]] },
+    { bass:'B3', chord:['B3','D4','G4'], mel:[[0,'B4',1],[1,'D5',.5],[1.5,'G4',1.6],[3,'B4',.9]] },
+    { bass:'A3', chord:['A3','C4','E4'], mel:[[0,'C5',1],[1,'E5',1],[2,'A5',1.6],[3.5,'G5',.6]] },
+    { bass:'F3', chord:['F3','A3','C4'], mel:[[0,'F5',1],[1,'E5',1],[2,'C5',1.8]] },
+    { bass:'C3', chord:['C4','E4','G4'], mel:[[0,'E5',.5],[.5,'G5',.5],[1,'E5',1.4],[3,'C5',.9]] },
+    { bass:'G3', chord:['B3','D4','G4'], mel:[[0,'D5',1],[1,'B4',.5],[1.5,'D5',1.6],[3,'G4',.9]] },
+    { bass:'F3', chord:['F3','A3','C4'], mel:[[0,'A4',1],[1,'C5',1],[2,'F5',1.8]] },
+    { bass:'G3', chord:['B3','D4','G4'], mel:[[0,'G5',1],[1,'F5',.5],[1.5,'D5',2.2]] },
+  ];
+  const BPM = 76, beat = 60/BPM, barLen = beat*4;
+
+  let ctx, master, filter, delay, fb, on=false, bar=0, next=0, timer=null;
+
+  function init(){
+    ctx = new (window.AudioContext||window.webkitAudioContext)();
+    master = ctx.createGain(); master.gain.value = 0;
+    filter = ctx.createBiquadFilter(); filter.type='lowpass'; filter.frequency.value=3600;
+    delay = ctx.createDelay(1.0); delay.delayTime.value = beat*0.75;
+    fb = ctx.createGain(); fb.gain.value = 0.24;
+    const wet = ctx.createGain(); wet.gain.value = 0.3;
+    filter.connect(master);
+    filter.connect(delay); delay.connect(fb); fb.connect(delay); delay.connect(wet); wet.connect(master);
+    master.connect(ctx.destination);
+  }
+
+  function note(freq, t, dur, type, vol){
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = type; o.frequency.value = freq;
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(vol, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(g); g.connect(filter);
+    o.start(t); o.stop(t + dur + 0.05);
+  }
+
+  function scheduleBar(b, t){
+    const d = bars[b % bars.length];
+    // bass
+    note(N[d.bass], t, barLen*0.95, 'sine', 0.16);
+    note(N[d.bass]/2 || N[d.bass], t, barLen*0.95, 'sine', 0.05);
+    // arpeggio lembut (8 ketukan)
+    for(let i=0;i<8;i++){
+      const f = N[d.chord[i % d.chord.length]];
+      note(f, t + i*(beat/2), beat*0.9, 'triangle', 0.045);
+    }
+    // melodi music box
+    d.mel.forEach(([pos, nm, len]) => {
+      note(N[nm], t + pos*beat, len*beat, 'triangle', 0.13);
+      note(N[nm]*2, t + pos*beat, len*beat*0.4, 'sine', 0.03); // kilau
+    });
+  }
+
+  function loop(){
+    while(next < ctx.currentTime + 0.6){
+      scheduleBar(bar, next);
+      next += barLen; bar++;
+    }
+  }
+
+  function start(){
+    if(!ctx) init();
+    if(ctx.state === 'suspended') ctx.resume();
+    if(on) return;
+    on = true;
+    next = ctx.currentTime + 0.15;
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
+    master.gain.linearRampToValueAtTime(0.85, ctx.currentTime + 1.4);
+    loop();
+    timer = setInterval(loop, 120);
+  }
+
+  function stop(){
+    if(!on) return;
+    on = false;
+    clearInterval(timer);
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setValueAtTime(master.gain.value, ctx.currentTime);
+    master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
+  }
+
+  function ding(){ // efek suara kecil pas ngeklik
+    if(!ctx) init();
+    if(ctx.state === 'suspended') ctx.resume();
+    const t = ctx.currentTime;
+    note(N['A5'], t, 0.35, 'triangle', 0.10);
+    note(N['E5'], t + 0.06, 0.4, 'sine', 0.06);
+  }
+
+  return { start, stop, ding, isOn: () => on };
+})();
+
+const musicBtn = document.getElementById('musicBtn');
+function setMusic(playing){
+  if(playing){ Music.start(); musicBtn.textContent='🎵'; musicBtn.classList.add('playing'); }
+  else { Music.stop(); musicBtn.textContent='🔇'; musicBtn.classList.remove('playing'); }
+}
+musicBtn.addEventListener('click', () => setMusic(!Music.isOn()));
+
+/* =======================================================================
+   LAYAR PEMBUKA
+   ======================================================================= */
+document.getElementById('openBtn').addEventListener('click', () => {
+  document.getElementById('intro').classList.add('hide');
+  setMusic(true);
+  setTimeout(typeLetter, 700);
+  rain(18);
+});
+
+/* =======================================================================
+   SURAT — efek diketik
+   ======================================================================= */
+let typed = false;
+function typeLetter(){
+  if(typed) return; typed = true;
+  const el = document.getElementById('paper');
+  const txt = CONFIG.surat.split('{nama}').join(CONFIG.nama);
+  let i = 0;
+  (function tick(){
+    if(i >= txt.length){
+      document.getElementById('letter').classList.add('done');
+      const s = document.getElementById('sign');
+      s.style.transition='opacity .8s'; s.style.opacity = 1;
+      return;
+    }
+    el.textContent += txt[i++];
+    setTimeout(tick, txt[i-1] === '\n' ? 90 : 22);
+  })();
+}
+
+/* =======================================================================
+   KARTU KENANGAN + MODAL
+   ======================================================================= */
+const grid = document.getElementById('memoGrid');
+CONFIG.kenangan.forEach((k, idx) => {
+  const b = document.createElement('button');
+  b.className = 'memo';
+  b.innerHTML = `<span class="tap">buka</span>
+    <span class="emoji">${k.emoji}</span>
+    <span class="t">${k.judul}</span>
+    <span class="s">${k.sub}</span>`;
+  b.addEventListener('click', () => openMemo(idx));
+  grid.appendChild(b);
+});
+
+const modal = document.getElementById('modal');
+const mBody = document.getElementById('mBody');
+function openMemo(i){
+  const k = CONFIG.kenangan[i];
+  mBody.innerHTML = `
+    ${k.foto ? `<img src="${k.foto}" alt="${k.judul}">` : `<div class="big">${k.emoji}</div>`}
+    <div class="date">${k.tanggal}</div>
+    <h3>${k.judul}</h3>
+    <p>${k.cerita}</p>`;
+  modal.classList.add('open');
+  Music.ding();
+  rain(8);
+}
+function closeModal(){ modal.classList.remove('open'); }
+document.getElementById('closeModal').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+/* =======================================================================
+   ALASAN RANDOM
+   ======================================================================= */
+let pool = [], seen = 0;
+const reasonText = document.getElementById('reasonText');
+document.getElementById('reasonBtn').addEventListener('click', () => {
+  if(pool.length === 0) pool = [...CONFIG.alasan].sort(() => Math.random() - .5);
+  reasonText.textContent = pool.pop();
+  reasonText.classList.remove('pop'); void reasonText.offsetWidth; reasonText.classList.add('pop');
+  seen++;
+  document.getElementById('reasonCount').textContent = `udah ${seen} alasan kebuka, masih banyak lagi 💗`;
+  Music.ding();
+  rain(4);
+});
+
+/* =======================================================================
+   JANJI
+   ======================================================================= */
+const pl = document.getElementById('promiseList');
+CONFIG.janji.forEach(j => {
+  const d = document.createElement('div');
+  d.className = 'promise';
+  d.innerHTML = `<div class="box">✓</div><span class="txt">${j}</span>`;
+  d.addEventListener('click', () => { d.classList.toggle('checked'); if(d.classList.contains('checked')){ Music.ding(); rain(3);} });
+  pl.appendChild(d);
+});
+
+/* =======================================================================
+   PERTANYAAN TERAKHIR
+   ======================================================================= */
+const noBtn = document.getElementById('noBtn');
+let dodge = 0;
+function runAway(){
+  dodge++;
+  const x = (Math.random() - .5) * Math.min(260, window.innerWidth * .55);
+  const y = (Math.random() - .5) * 120;
+  noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${(Math.random()-.5)*20}deg)`;
+  const kata = ['Belum 😤','Yakin? 🥺','Beneran? 😢','Coba lagi 💔','Nggak bisa ditekan 😭','Ayolah 🙏','Nih tombol malu 🫣'];
+  noBtn.textContent = kata[Math.min(dodge, kata.length - 1)];
+}
+noBtn.addEventListener('mouseenter', runAway);
+noBtn.addEventListener('click', e => { e.preventDefault(); runAway(); });
+noBtn.addEventListener('touchstart', e => { e.preventDefault(); runAway(); }, {passive:false});
+
+document.getElementById('yesBtn').addEventListener('click', () => {
+  document.getElementById('askWrap').style.display = 'none';
+  document.getElementById('yesWrap').classList.add('show');
+  Music.ding();
+  rain(70);
+  setTimeout(() => rain(40), 700);
+});
+document.getElementById('againBtn').addEventListener('click', () => { rain(40); Music.ding(); });
+
+/* =======================================================================
+   HUJAN HATI
+   ======================================================================= */
+function rain(n){
+  const set = ['💗','💕','💖','🌸','✨','🎀','🧸','💞'];
+  for(let i=0;i<n;i++){
+    const el = document.createElement('div');
+    el.className = 'fall';
+    el.textContent = set[Math.floor(Math.random()*set.length)];
+    el.style.left = Math.random()*100 + 'vw';
+    el.style.fontSize = (18 + Math.random()*26) + 'px';
+    const dur = 2.4 + Math.random()*2.4;
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = (Math.random()*0.6) + 's';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), (dur + 1) * 1000);
+  }
+}
+
+/* =======================================================================
+   ANIMASI MUNCUL SAAT DI-SCROLL
+   ======================================================================= */
+const io = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      if(e.target.querySelector('#paper')) typeLetter();
+    }
+  });
+}, {threshold:.15});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
