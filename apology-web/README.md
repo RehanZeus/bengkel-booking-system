@@ -114,6 +114,28 @@ Foto dan videonya ikut kebawa, jadi aman dibuka dari HP dia.
 **Kalau nggak pakai foto/video sama sekali:** kirim `index.html` sama
 `config.js` langsung juga bisa, tapi dua-duanya harus ada di folder yang sama.
 
+## 6. Kasih nama webnya
+
+**Nama di tab browser** diatur di `config.js` paling atas:
+
+```js
+judulTab: "Amaliarokhaliku 💗",
+```
+
+**Nama di link-nya.** Habis di-drop ke Netlify, kamu dapet link acak macam
+`fluffy-cat-123.netlify.app`. Bisa diganti gratis:
+
+1. Di dashboard Netlify, buka **Site configuration → Change site name**
+2. Isi `amaliarokhaliku`
+3. Link-nya jadi `amaliarokhaliku.netlify.app`
+
+Cuma boleh huruf kecil, angka, sama tanda minus — nggak boleh spasi.
+
+**Kalau mau domain beneran** (tanpa embel-embel `.netlify.app`), beli dulu
+domainnya di Niagahoster, Domainesia, Rumahweb, atau Cloudflare, terus di
+Netlify buka **Domain management → Add a domain** dan ikutin petunjuk DNS-nya.
+Netlify ngasih sertifikat HTTPS-nya gratis.
+
 ---
 
 ## Kalau halamannya jadi putih kosong

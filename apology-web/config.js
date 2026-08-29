@@ -10,7 +10,10 @@
    ========================================================================= */
 
 const CONFIG = {
-  // Nama panggilan dia (muncul di judul besar)
+  // Nama web-nya, muncul di tab browser dan pas link-nya di-share
+  judulTab: "Amaliarokhaliku 💗",
+
+  // Nama panggilan dia (muncul di judul besar di halamannya)
   nama: "Sayang",
 
   // Isi surat maaf. Tulis {nama} kalau mau nama dia muncul di situ.
