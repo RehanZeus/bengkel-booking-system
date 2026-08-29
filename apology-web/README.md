@@ -1,105 +1,136 @@
-# 💌 Web Permintaan Maaf
+# 💌 Web Permintaan Maaf — panduan edit sendiri
 
-Satu file HTML, tanpa build, tanpa install apa pun. Tinggal buka `index.html` di browser.
+Nggak perlu install apa-apa. Nggak perlu ngerti coding. Cukup 2 file:
 
-## Isinya apa aja
+```
+apology-web/
+├── index.html   ← jangan diapa-apain, ini mesinnya
+├── config.js    ← INI yang kamu edit (semua tulisan ada di sini)
+├── foto/        ← bikin sendiri, isi foto-fotonya
+└── video/       ← bikin sendiri, isi videonya
+```
 
-- **Layar amplop** di awal — sekali klik "Buka Suratnya", musiknya langsung jalan
-- **Musik romantis** yang dibikin langsung lewat Web Audio API (nggak butuh file mp3, jadi nggak ada masalah file hilang / autoplay diblokir). Tombol 🎵 di pojok kanan atas buat on/off
-- **Surat maaf** yang muncul diketik pelan-pelan
-- **Album kenangan Purwokerto** berisi kartu yang bisa diklik satu-satu, tiap kartu buka cerita kalian
-- **Video highlight trip Jogja** yang bisa diputar langsung di halamannya
-- **Tombol "Kasih Alasan"** — keluar alasan sayang random tiap dipencet
-- **Daftar janji** yang bisa dicentang
-- **Pertanyaan terakhir** "Boleh aku dimaafin?" — tombol "Belum" kabur kalau didekati 😄
-- Hujan hati, hati melayang, dan animasi lucu di mana-mana
+---
 
-## Cara ganti isinya
+## 1. Buka dulu halamannya
 
-Buka `index.html`, scroll ke bagian `const CONFIG = { ... }` (ada penandanya:
-`BAGIAN YANG BOLEH KAMU EDIT`). Semua teks ada di situ:
+Klik dua kali `index.html`. Kebuka di browser. Udah, segitu doang.
+
+Kalau nanti abis ngedit tampilannya belum berubah, tekan **Ctrl + Shift + R**
+(Mac: **Cmd + Shift + R**) buat refresh paksa.
+
+## 2. Edit tulisannya
+
+Buka `config.js` pakai **Notepad** (Windows), **TextEdit** (Mac), atau
+**VS Code** kalau ada. Isinya cuma tulisan-tulisan kamu.
+
+Aturannya cuma 3:
+
+1. Ganti tulisan yang ada **di dalam tanda kutip** `"..."` aja
+2. Jangan hapus tanda kutip, koma, atau kurungnya
+3. Kalau mau nulis tanda kutip di dalam kalimat, pakai yang miring: `\"`
+
+Contoh — sebelum:
+
+```js
+nama: "Sayang",
+```
+
+sesudah:
+
+```js
+nama: "Dek Ayu",
+```
+
+Simpan (Ctrl + S), balik ke browser, refresh. Langsung berubah.
+
+### Apa aja yang bisa diganti di `config.js`
 
 | Bagian | Isinya |
 |---|---|
 | `nama` | nama panggilan dia, muncul di judul besar |
-| `surat` | isi surat maaf. Tulis `{nama}` di mana pun kalau mau namanya muncul |
-| `album` | judul section plus daftar kartu kenangan Purwokerto (emoji, judul, tanggal, cerita) |
-| `trip` | video highlight trip Jogja: video, sampul, cerita, dan daftar momen |
-| `alasan` | alasan random yang muncul pas tombol dipencet |
+| `surat` | isi surat maafnya. Tulis `{nama}` di mana pun kalau mau namanya muncul |
+| `album` | judul section + kartu-kartu foto (emoji, judul, tanggal, cerita) |
+| `trip` | video highlight: video, sampul, durasi, cerita, daftar momen |
+| `alasan` | alasan random yang muncul tiap tombol dipencet |
 | `janji` | daftar janji yang bisa dicentang |
 
-### Nambah kartu kenangan
+## 3. Masukin foto
 
-Copy satu blok di dalam `album.kenangan`, terus ubah isinya:
+1. Bikin folder baru namanya `foto` di sebelah `index.html`
+2. Masukin foto-fotonya ke situ
+3. Di `config.js`, cari kartu yang mau dipasangin, isi bagian `foto:`
 
 ```js
-{ emoji:"🎡", judul:"Ke Pasar Malam", sub:"naik bianglala", tanggal:"bulan lalu",
-  foto:"", cerita:"Ceritanya tulis di sini." },
+{ emoji:"🤳", judul:"Selfie Gagal", sub:"nggak ada yang bener", tanggal:"entah percobaan ke berapa",
+  foto:"foto/selfie-gagal.jpg", cerita:"..." },
 ```
 
-### Pakai foto asli
+**Nama filenya harus sama persis**, termasuk besar-kecil huruf dan
+`.jpg` / `.png`-nya. Kalau fotonya nggak muncul, 90% penyebabnya salah ketik nama file.
 
-1. Bikin folder `foto/` di sebelah `index.html`
-2. Taruh gambarnya, misal `foto/baturraden.jpg`
-3. Isi `foto:"foto/baturraden.jpg"` di kartu yang mau dipasangin
+Kalau `foto:""` dibiarin kosong, yang tampil emoji besar — tetap aman kok.
 
-Kalau `foto` dibiarkan kosong (`foto:""`), yang tampil emoji besar — tetap lucu kok.
+Tips: foto landscape atau kotak paling pas. Foto portrait tetap bisa,
+otomatis dipotong di tengah biar ceritanya nggak kedorong keluar layar.
 
-Fotonya cuma muncul di dalam pop-up (setelah kartunya diklik), jadi kartunya
-tetap emoji dan tetap jadi kejutan buat dia.
+### Nambah atau ngurangin kartu
 
-Tips foto:
+Mau nambah: copy satu blok `{ ... },` di dalam `album.kenangan`, tempel di
+bawahnya, ganti isinya. Mau ngurangin: hapus satu blok `{ ... },` utuh —
+dari kurung buka sampai koma terakhirnya.
 
-- Format `.jpg`, `.png`, `.webp`, `.gif` semuanya jalan
-- Foto landscape atau kotak paling pas. Foto portrait tetap bisa, cuma
-  otomatis dipotong di bagian tengah biar ceritanya nggak kedorong keluar layar
-- Foto dari HP biasanya 3-5 MB. Kalau file HTML-nya mau dikirim langsung ke dia,
-  kompres dulu (misal di squoosh.app) biar nggak berat dibuka
+## 4. Masukin video
 
-### Masukin video highlight trip Jogja
+1. Bikin folder `video` di sebelah `index.html`
+2. Masukin videonya, misal `trip-jogja.mp4`
+3. Di `config.js` bagian `trip`, isi:
 
-Bagian ini isinya **satu video** aja — gabungan potongan-potongan random selama
-di Jogja.
+```js
+video: "video/trip-jogja.mp4",
+durasi: "2:14",
+```
 
-1. Bikin folder `video/` di sebelah `index.html`
-2. Taruh videonya, misal `video/trip-jogja.mp4`
-3. Di bagian `trip`, isi `video: "video/trip-jogja.mp4"`
-
-Selama `video` masih kosong, yang tampil emoji plus tulisan "videonya belum
-dipasang" dan catatan cara masangnya.
-
-Yang bisa diatur di `trip`:
-
-| Isian | Fungsinya |
-|---|---|
-| `video` | file videonya |
-| `poster` | gambar sampul sebelum diputar. Kosongin buat pakai emoji |
-| `durasi` | tulisan durasi di pojok sampul, misal `"2:14"`. Boleh dikosongin |
-| `cerita` | keterangan di bawah video |
-| `momen` | daftar label momen yang ada di dalam videonya |
-
-Pas videonya diputar, musik latar otomatis berhenti, terus nyala lagi begitu
-videonya dipause atau habis. Jadi suara video sama musiknya nggak tabrakan.
-Pas videonya kelar, muncul hujan hati.
+Selama masih kosong, tampilannya jadi tulisan "videonya belum dipasang".
 
 Tips video:
 
-- `.mp4` paling aman — itu format bawaan rekaman HP, jalan di semua browser.
-  `.webm` juga bisa. `.mov` kadang rewel di HP Android
+- `.mp4` paling aman — itu format bawaan rekaman HP, jalan di semua browser
 - Video HP 1 menit gampang tembus 100 MB. Kompres dulu ke 720p
-  (misal pakai HandBrake atau fitur kompres bawaan HP) biar nggak berat dibuka
-- Isi `poster` kalau videonya besar — sampulnya kebuka duluan, videonya baru
-  diunduh pas tombol play dipencet
+  (pakai HandBrake, atau fitur kompres bawaan HP) biar nggak berat dibuka
+- Kalau videonya besar, isi juga `poster:"video/sampul.jpg"`. Sampulnya
+  kebuka duluan, videonya baru diunduh pas tombol play dipencet
 
-## Cara ngirim ke dia
+## 5. Kirim ke dia
 
-- **Paling gampang:** kirim file `index.html`-nya langsung (kalau nggak pakai foto)
-- **Biar jadi link:** upload folder `apology-web` ke Netlify Drop, Vercel, atau GitHub Pages,
-  terus kirim linknya. Semua isinya statis, jadi nggak perlu server
+**Cara paling gampang — jadiin link (gratis, nggak perlu daftar):**
 
-## Catatan
+1. Buka [app.netlify.com/drop](https://app.netlify.com/drop)
+2. Seret folder `apology-web` ke kotak di halaman itu
+3. Tunggu sebentar, langsung dapet link. Kirim linknya ke dia
 
-- Musik baru bisa bunyi setelah tombol "Buka Suratnya" diklik — itu aturan browser,
-  bukan bug. Makanya dibikin layar amplop di awal
-- Font diambil dari Google Fonts. Kalau dibuka offline, otomatis pakai font bawaan
-  dan tampilannya tetap aman
+Foto dan videonya ikut kebawa, jadi aman dibuka dari HP dia.
+
+**Kalau nggak pakai foto/video sama sekali:** kirim `index.html` sama
+`config.js` langsung juga bisa, tapi dua-duanya harus ada di folder yang sama.
+
+---
+
+## Kalau halamannya jadi putih kosong
+
+Berarti ada tanda kutip atau koma yang kehapus di `config.js`. Caranya balikin:
+
+1. Klik kanan di halaman → **Inspect** → tab **Console**
+2. Ada tulisan merah, di situ ketahuan barisnya nomor berapa
+3. Cek baris itu di `config.js`, biasanya kurang tanda kutip atau koma
+
+Kalau bingung, simpan dulu backup `config.js` sebelum ngedit banyak-banyak.
+
+## Catatan lain
+
+- **Musiknya dibikin langsung sama halamannya** (bukan file mp3), jadi nggak
+  ada file lagu yang bisa hilang. Baru bunyi setelah tombol "Buka Suratnya"
+  diklik — itu aturan browser, bukan error
+- Pas video diputar, musiknya otomatis berhenti, nyala lagi pas videonya kelar
+- Kalau dibuka tanpa internet, fontnya ganti bawaan komputer.
+  Tampilannya tetap rapi
