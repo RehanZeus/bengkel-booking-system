@@ -1,0 +1,3 @@
+# Web ini buat berdua, bukan buat dicari orang di Google.
+User-agent: *
+Disallow: /

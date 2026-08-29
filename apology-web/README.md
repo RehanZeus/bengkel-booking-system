@@ -7,6 +7,8 @@ apology-web/
 ├── index.html   ← jangan diapa-apain, ini mesinnya
 ├── config.js    ← INI yang kamu edit (semua tulisan ada di sini)
 ├── .htaccess    ← setelan buat hosting Apache (Hostinger)
+├── preview.jpg  ← gambar yang muncul pas link-nya dikirim ke WhatsApp
+├── robots.txt   ← biar nggak muncul di pencarian Google
 ├── foto/        ← isi foto-fotonya
 ├── video/       ← isi videonya
 └── musik/       ← isi lagunya (kalau mau ganti musik bawaan)
@@ -161,6 +163,8 @@ public_html/
 ├── index.html
 ├── config.js
 ├── .htaccess
+├── preview.jpg
+├── robots.txt
 ├── foto/
 ├── video/
 └── musik/
@@ -188,7 +192,54 @@ ke `https://`.
 Domain baru kadang butuh beberapa jam sampai bisa diakses di mana-mana.
 Kalau belum kebuka, tunggu dulu, jangan buru-buru diutak-atik.
 
-## 7. Ganti isinya setelah online
+## 7. Cek dulu sebelum dikirim
+
+Buka `https://amaliarokhaliku.xyz` **di HP**, bukan cuma di laptop — dia
+bakal bukanya di HP.
+
+Cek satu-satu:
+
+- [ ] Layar amplop muncul, tombol "Buka Suratnya" bisa diklik
+- [ ] **Musiknya bunyi** setelah tombol diklik (jangan lupa volume HP-nya)
+- [ ] Suratnya ngetik sendiri sampai habis
+- [ ] Kartu foto bisa diklik, fotonya muncul (bukan ikon gambar rusak)
+- [ ] Videonya bisa diputar, dan musiknya berhenti pas video jalan
+- [ ] Tombol "Kasih Alasan" ngeluarin tulisan
+- [ ] Tombol "Belum" kabur pas mau dipencet
+- [ ] Tombol "Iya, dimaafin" ngeluarin hujan hati
+
+Coba juga buka pakai **data seluler** (matiin WiFi), buat mastiin bukan cuma
+jalan di jaringan kamu.
+
+### Kalau ada yang nggak beres
+
+| Kejadiannya | Penyebab & solusinya |
+|---|---|
+| Muncul halaman Hostinger / "Coming Soon" | Masih ada `index.php` atau `default.php` di `public_html`. Hapus |
+| Muncul daftar folder | `index.html` kebungkus folder lain. Pindahin ke `public_html` langsung |
+| Halaman putih kosong | Ada tanda kutip/koma kehapus di `config.js`. Cek Console browser |
+| Foto ikon rusak | Nama file di `config.js` beda sama nama file aslinya. Cek huruf besar-kecilnya |
+| Musik nggak bunyi | Belum klik "Buka Suratnya", volume HP mati, atau nama file lagunya salah |
+| Tampilan lama terus | Buka pakai mode penyamaran (incognito) buat mastiin bukan cache |
+| "Not secure" / gembok merah | SSL belum aktif. hPanel → Security → SSL |
+
+## 8. Kirim ke dia
+
+Tinggal kirim link-nya: **https://amaliarokhaliku.xyz**
+
+Pas dikirim di WhatsApp, yang muncul preview kartu pink bertulisan
+"Ada surat buat kamu 💌" — itu dari file `preview.jpg` sama tag `og:` di
+`index.html`. Kalau mau ganti tulisannya, edit bagian `og:title` sama
+`og:description` di `index.html` paling atas.
+
+Kalau preview-nya belum muncul padahal filenya udah keupload, WhatsApp lagi
+nyimpen versi lama link itu. Akalin dengan kirim `https://amaliarokhaliku.xyz/?a=1`
+sekali, atau tunggu beberapa jam.
+
+Saran kecil: kasih tau dia buat **pakai earphone** dan bukanya pas lagi
+sendirian. Ada musik sama videonya, sayang kalau dibuka sambil buru-buru.
+
+## 9. Ganti isinya setelah online
 
 Cukup edit `config.js` di komputer, terus upload ulang **file itu aja** ke
 `public_html` (timpa yang lama). Nggak perlu upload ulang semuanya.
@@ -196,7 +247,7 @@ Cukup edit `config.js` di komputer, terus upload ulang **file itu aja** ke
 Berkat `.htaccess` yang ikut ke-upload, hasil editnya langsung kelihatan
 tanpa harus clear cache browser.
 
-## 8. Nama webnya
+## 10. Nama webnya
 
 Nama yang muncul di tab browser diatur di `config.js` paling atas:
 
