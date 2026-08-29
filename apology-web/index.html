@@ -323,8 +323,8 @@
   <!-- ===== KENANGAN ===== -->
   <section class="reveal">
     <div class="sec-head">
-      <h2>📸 Kebersamaan Kita</h2>
-      <span>klik satu-satu ya, semuanya masih aku inget kok</span>
+      <h2 id="albumJudul"></h2>
+      <span id="albumSub"></span>
     </div>
     <div class="grid" id="memoGrid"></div>
   </section>
@@ -421,26 +421,31 @@ ke mana-mana, dan aku bakal belajar jadi lebih baik buat kamu.
 
 Makasih udah sabar sama aku sejauh ini ${'\u{1F49D}'}`,
 
-  // Kartu kenangan. Mau tambah? tinggal copy satu blok { ... },
+  // Album foto kebersamaan di Purwokerto.
+  // Mau nambah kartu? tinggal copy satu blok { ... }, terus ubah isinya.
   // foto: "" -> tampil emoji besar. foto: "foto/kita.jpg" -> tampil gambar.
-  kenangan: [
-    { emoji:"🌸", judul:"Pertama Ketemu",  sub:"awal semuanya", tanggal:"hari itu",
-      foto:"", cerita:"Aku masih inget kamu senyum duluan, terus aku salah tingkah setengah mati. Dari hari itu aku ngerasa hidup aku jadi rame." },
-    { emoji:"🍜", judul:"Makan Bareng",    sub:"tempat favorit kita", tanggal:"berkali-kali",
-      foto:"", cerita:"Kamu selalu bilang 'dikit aja' terus ujung-ujungnya nambah. Aku suka lihat kamu makan enak, itu salah satu hal favorit aku." },
-    { emoji:"🎬", judul:"Nonton Bareng",   sub:"kamu ketiduran lagi", tanggal:"malam minggu",
-      foto:"", cerita:"Filmnya sering nggak selesai karena kamu ketiduran di bahu aku. Nggak apa-apa, itu bagian paling enak dari nontonnya." },
-    { emoji:"🌧️", judul:"Kehujanan",       sub:"lari bareng, ketawa bareng", tanggal:"nggak sengaja",
-      foto:"", cerita:"Kita basah kuyup, kamu ngomel sambil ketawa, dan aku mikir: kayaknya aku mau begini terus sama kamu." },
-    { emoji:"📱", judul:"Chat Tengah Malam", sub:"sampe ketiduran", tanggal:"hampir tiap hari",
-      foto:"", cerita:"Ngobrol hal nggak penting sampai jam 2 pagi. Besoknya ngantuk, tapi nggak pernah nyesel." },
-    { emoji:"🎂", judul:"Ulang Tahun Kamu", sub:"kamu nangis terharu", tanggal:"tahun kemarin",
-      foto:"", cerita:"Kejutannya berantakan, kuenya hampir jatuh, tapi kamu tetep nangis terharu. Itu momen yang aku simpan rapet-rapet." },
-    { emoji:"🚗", judul:"Jalan-jalan",     sub:"nyasar tapi seru", tanggal:"perjalanan kita",
-      foto:"", cerita:"Salah jalan, muter-muter, tapi kamu jadiin itu lucu. Kamu emang jago bikin hal berantakan jadi kenangan." },
-    { emoji:"🤝", judul:"Waktu Aku Susah", sub:"kamu tetap di sana", tanggal:"masa-masa berat",
-      foto:"", cerita:"Kamu nggak pergi waktu aku lagi nggak enak diajak ngobrol. Itu yang bikin aku ngerasa paling bersalah waktu nyakitin kamu." },
-  ],
+  album: {
+    judul: "\u{1F4F8} Kebersamaan Kita di Purwokerto",
+    sub: "klik satu-satu ya, semuanya masih aku inget kok",
+    kenangan: [
+      { emoji:"\u{1F689}", judul:"Nyampe Purwokerto", sub:"kamu senyum duluan", tanggal:"hari pertama",
+        foto:"", cerita:"Turun dari kereta, udaranya kerasa beda, dan kamu langsung narik tangan aku buat jalan cepet. Muka kamu waktu itu masih kebayang sampai sekarang." },
+      { emoji:"\u{1F362}", judul:"Mendoan Anget", sub:"sambel kecapnya pedes", tanggal:"sore itu",
+        foto:"", cerita:"Kamu bilang cuma mau nyobain satu, ujungnya habis sepiring berdua. Sekarang tiap lihat mendoan aku inget kamu." },
+      { emoji:"\u26F0\uFE0F", judul:"Baturraden", sub:"dingin, kabutnya turun", tanggal:"pagi-pagi",
+        foto:"", cerita:"Kamu kedinginan tapi nggak mau buru-buru pulang, malah minta foto terus. Aku pinjemin jaket, terus kamu pakai sampai sore." },
+      { emoji:"\u{1F4A6}", judul:"Main Air di Curug", sub:"basah-basahan", tanggal:"siang itu",
+        foto:"", cerita:"Airnya dingin banget, kamu teriak-teriak tapi tetep maju duluan. Aku ketawa sampai sakit perut." },
+      { emoji:"\u{1F35C}", judul:"Soto Sokaraja", sub:"sambel kacangnya juara", tanggal:"jam makan siang",
+        foto:"", cerita:"Kamu kaget sotonya pakai sambel kacang, terus malah nambah. Katanya pengin balik lagi ke sana suatu hari." },
+      { emoji:"\u{1F303}", judul:"Alun-alun Malem", sub:"duduk-duduk doang", tanggal:"malem terakhir",
+        foto:"", cerita:"Nggak ngapa-ngapain, cuma duduk sambil ngobrol ngalor ngidul. Tapi itu justru bagian yang paling aku kangenin." },
+      { emoji:"\u{1F5FB}", judul:"Gunung Slamet Kelihatan", sub:"pagi yang cerah", tanggal:"pas lagi beruntung",
+        foto:"", cerita:"Langitnya bersih, kamu nunjuk-nunjuk heboh kayak baru pertama kali lihat gunung. Aku malah sibuk lihatin kamu." },
+      { emoji:"\u{1F6F5}", judul:"Muter Kota Berdua", sub:"nyasar tapi seru", tanggal:"sepanjang trip",
+        foto:"", cerita:"Nggak ada rencana, cuma jalan ke mana aja. Nyasar sama kamu ternyata nggak pernah kerasa rugi." },
+    ],
+  },
 
   // Satu video highlight trip Jogja (gabungan potongan-potongan random).
   // video : "video/trip-jogja.mp4" -> taruh filenya di folder video/
@@ -458,7 +463,6 @@ Makasih udah sabar sama aku sejauh ini ${'\u{1F49D}'}`,
     momen: [
       "turun di Tugu",
       "Malioboro malem",
-      "gudeg pertama kamu",
       "nyasar naik motor",
       "maksa nunggu sunrise",
       "angkringan tengah malam",
@@ -657,8 +661,11 @@ function typeLetter(){
 /* =======================================================================
    KARTU KENANGAN + MODAL
    ======================================================================= */
+document.getElementById('albumJudul').textContent = CONFIG.album.judul;
+document.getElementById('albumSub').textContent = CONFIG.album.sub;
+
 const grid = document.getElementById('memoGrid');
-CONFIG.kenangan.forEach((k, idx) => {
+CONFIG.album.kenangan.forEach((k, idx) => {
   const b = document.createElement('button');
   b.className = 'memo';
   b.innerHTML = `<span class="tap">buka</span>
@@ -672,7 +679,7 @@ CONFIG.kenangan.forEach((k, idx) => {
 const modal = document.getElementById('modal');
 const mBody = document.getElementById('mBody');
 function openMemo(i){
-  const k = CONFIG.kenangan[i];
+  const k = CONFIG.album.kenangan[i];
   mBody.innerHTML = `
     ${k.foto ? `<img src="${k.foto}" alt="${k.judul}">` : `<div class="big">${k.emoji}</div>`}
     <div class="date">${k.tanggal}</div>

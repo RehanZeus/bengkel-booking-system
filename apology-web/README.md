@@ -7,7 +7,7 @@ Satu file HTML, tanpa build, tanpa install apa pun. Tinggal buka `index.html` di
 - **Layar amplop** di awal — sekali klik "Buka Suratnya", musiknya langsung jalan
 - **Musik romantis** yang dibikin langsung lewat Web Audio API (nggak butuh file mp3, jadi nggak ada masalah file hilang / autoplay diblokir). Tombol 🎵 di pojok kanan atas buat on/off
 - **Surat maaf** yang muncul diketik pelan-pelan
-- **Kartu kenangan** yang bisa diklik satu-satu, tiap kartu buka cerita kalian
+- **Album kenangan Purwokerto** berisi kartu yang bisa diklik satu-satu, tiap kartu buka cerita kalian
 - **Video highlight trip Jogja** yang bisa diputar langsung di halamannya
 - **Tombol "Kasih Alasan"** — keluar alasan sayang random tiap dipencet
 - **Daftar janji** yang bisa dicentang
@@ -23,14 +23,14 @@ Buka `index.html`, scroll ke bagian `const CONFIG = { ... }` (ada penandanya:
 |---|---|
 | `nama` | nama panggilan dia, muncul di judul besar |
 | `surat` | isi surat maaf. Tulis `{nama}` di mana pun kalau mau namanya muncul |
-| `kenangan` | daftar kartu kenangan (emoji, judul, tanggal, cerita) |
+| `album` | judul section plus daftar kartu kenangan Purwokerto (emoji, judul, tanggal, cerita) |
 | `trip` | video highlight trip Jogja: video, sampul, cerita, dan daftar momen |
 | `alasan` | alasan random yang muncul pas tombol dipencet |
 | `janji` | daftar janji yang bisa dicentang |
 
 ### Nambah kartu kenangan
 
-Copy satu blok di dalam `kenangan`, terus ubah isinya:
+Copy satu blok di dalam `album.kenangan`, terus ubah isinya:
 
 ```js
 { emoji:"🎡", judul:"Ke Pasar Malam", sub:"naik bianglala", tanggal:"bulan lalu",
@@ -40,8 +40,8 @@ Copy satu blok di dalam `kenangan`, terus ubah isinya:
 ### Pakai foto asli
 
 1. Bikin folder `foto/` di sebelah `index.html`
-2. Taruh gambarnya, misal `foto/pertama-ketemu.jpg`
-3. Isi `foto:"foto/pertama-ketemu.jpg"` di kartu yang mau dipasangin
+2. Taruh gambarnya, misal `foto/baturraden.jpg`
+3. Isi `foto:"foto/baturraden.jpg"` di kartu yang mau dipasangin
 
 Kalau `foto` dibiarkan kosong (`foto:""`), yang tampil emoji besar — tetap lucu kok.
 
